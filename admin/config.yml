@@ -22,7 +22,7 @@ collections:
               - { label: "Empresa", name: "brand", widget: "string" }
               - { label: "Descrição", name: "description", widget: "string" }
               - { label: "Cupom", name: "code", widget: "string" }
-              - { label: "Link (opcional)", name: "url", widget: "string", required: false }
+              - { label: "Link", name: "url", widget: "string", required: false }
 
   - name: "products"
     label: "Produtos"
