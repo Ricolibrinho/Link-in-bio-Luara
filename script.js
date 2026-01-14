@@ -1,5 +1,8 @@
 console.log("script.js carregou ✅");
 // Extracted from original index.html
+const COUPONS_JSON = "/data/coupons.json";
+const PRODUCTS_JSON = "/data/products.json";
+
 const defaultConfig = {
   profile_name: 'Maria Beauty',
   profile_bio: 'Dicas de beleza e perfumaria\nReviews honestos de produtos\nCupons exclusivos',
@@ -129,26 +132,74 @@ if (window.elementSdk) {
 // banco de dados 
 
 async function initDataTabs() {
-  const COUPONS_JSON = "/data/coupons.json";
-  const PRODUCTS_JSON = "/data/products.json";
-
   const tabsEl = document.getElementById("tabs");
   const contentEl = document.getElementById("tabContent");
 
-  // Se não existir no HTML, não quebra o site
-  if (!tabsEl || !contentEl) return;
+  if (!tabsEl || !contentEl) {
+    console.warn("Containers de abas não encontrados");
+    return;
+  }
 
   const [couponsRes, productsRes] = await Promise.allSettled([
     fetch(COUPONS_JSON, { cache: "no-store" }).then(r => r.json()),
     fetch(PRODUCTS_JSON, { cache: "no-store" }).then(r => r.json()),
   ]);
 
-  const coupons = couponsRes.status === "fulfilled" ? (couponsRes.value.items || []) : [];
-  const products = productsRes.status === "fulfilled" ? (productsRes.value.items || []) : [];
+  const coupons = couponsRes.status === "fulfilled"
+    ? (couponsRes.value.items || [])
+    : [];
 
-  // ---- daqui pra baixo: seu código de abas/render (groupByCategory, renderTabContent etc.)
-  // Se você já tem essas funções no arquivo, só chama a lógica aqui.
+  const products = productsRes.status === "fulfilled"
+    ? (productsRes.value.items || [])
+    : [];
+
+  const couponsByCat = groupByCategory(coupons);
+  const productsByCat = groupByCategory(products);
+
+  const categories = Array.from(
+    new Set([...couponsByCat.keys(), ...productsByCat.keys()])
+  );
+
+  if (!categories.length) {
+    tabsEl.innerHTML = "";
+    contentEl.innerHTML =
+      `<p class="text-center text-sm" style="color:#9CA3AF;">Sem itens por enquanto.</p>`;
+    return;
+  }
+
+  const priority = ["Cupons Exclusivos", "Produtos Favoritos"];
+  categories.sort((a, b) => {
+    const ia = priority.indexOf(a);
+    const ib = priority.indexOf(b);
+    if (ia === -1 && ib === -1) return a.localeCompare(b);
+    if (ia === -1) return 1;
+    if (ib === -1) return -1;
+    return ia - ib;
+  });
+
+  let active = categories[0];
+
+  function render() {
+    tabsEl.innerHTML = categories
+      .map(cat => buildTabButton(cat, cat === active))
+      .join("");
+
+    tabsEl.querySelectorAll("button[data-tab]").forEach(btn => {
+      btn.onclick = () => {
+        active = btn.dataset.tab;
+        render();
+        contentEl.innerHTML =
+          renderTabContent(active, couponsByCat, productsByCat);
+      };
+    });
+
+    contentEl.innerHTML =
+      renderTabContent(active, couponsByCat, productsByCat);
+  }
+
+  render();
 }
+
 
 function escapeHtml(str) {
   return String(str ?? "")
