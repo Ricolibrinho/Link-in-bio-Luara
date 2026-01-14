@@ -1,12 +1,18 @@
 const SUPABASE_URL = "https://yxeqmdivbcnsfkboyffk.supabase.com";
 const SUPABASE_ANON_KEY = "sb_publishable_mRpYXGoElj8xB9f600jx2g_EHll3-WZ";
 
-const supabase = window.supabase.createClient(
+// evita "already been declared" mesmo se o script rodar 2x
+window.__supabaseClient = window.__supabaseClient || window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
 
-const $ = (id) => document.getElementById(id);
+const supabase = window.__supabaseClient;
+
+// evita redeclarar também
+window.__$ = window.__$ || ((id) => document.getElementById(id));
+const $ = window.__$;
+
 
 // =======================
 // SESSÃO / UI
