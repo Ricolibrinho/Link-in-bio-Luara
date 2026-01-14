@@ -130,6 +130,14 @@ if (window.elementSdk) {
 const COUPONS_JSON = "/data/coupons.json";
 const PRODUCTS_JSON = "/data/products.json";
 
+const [couponsRes, productsRes] = await Promise.allSettled([
+  fetch(COUPONS_JSON, { cache: "no-store" }).then(r => r.json()),
+  fetch(PRODUCTS_JSON, { cache: "no-store" }).then(r => r.json()),
+]);
+
+const coupons = couponsRes.status === "fulfilled" ? (couponsRes.value.items || []) : [];
+const products = productsRes.status === "fulfilled" ? (productsRes.value.items || []) : [];
+
 function escapeHtml(str) {
   return String(str ?? "")
     .replaceAll("&", "&amp;")
