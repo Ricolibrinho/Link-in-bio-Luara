@@ -34,6 +34,10 @@ function escapeHtml(str) {
 
 // ---------- cards ----------
 function couponCard(c) {
+  let url = (p.url || "").trim();
+  if (url && !url.startsWith("http://") && !url.startsWith("https://")) {
+    url = "https://" + url;
+  }
   const icon = c.icon ? escapeHtml(c.icon) : "🏷️";
   const brand = escapeHtml(c.brand || "");
   const desc = escapeHtml(c.description || "");
