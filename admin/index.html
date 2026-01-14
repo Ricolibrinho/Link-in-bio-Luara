@@ -1,11 +1,236 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Admin</title>
-  </head>
-  <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  </body>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin</title>
+  <style>
+    body{font-family:system-ui;max-width:980px;margin:30px auto;padding:16px}
+    .card{border:1px solid #e5e7eb;border-radius:12px;padding:14px;margin:12px 0}
+    input,textarea{width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:10px;margin:6px 0}
+    button{padding:10px 12px;border-radius:10px;border:1px solid #e5e7eb;background:#111827;color:#fff;cursor:pointer}
+    button.secondary{background:#fff;color:#111827}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .muted{color:#6b7280;font-size:14px}
+    .list{display:grid;gap:10px}
+    .item{border:1px solid #e5e7eb;border-radius:12px;padding:12px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  </style>
+</head>
+<body>
+
+<h2>Admin</h2>
+<p class="muted">Login e gerenciamento de Cupons / Produtos (Supabase)</p>
+
+<div id="loginCard" class="card">
+  <h3>Entrar</h3>
+  <input id="email" type="email" placeholder="Email" />
+  <input id="password" type="password" placeholder="Senha" />
+  <button id="btnLogin">Login</button>
+  <p id="loginMsg" class="muted"></p>
+</div>
+
+<div id="panel" style="display:none;">
+  <div class="actions">
+    <button id="btnLogout" class="secondary">Sair</button>
+    <span id="userInfo" class="muted"></span>
+  </div>
+
+  <div class="card">
+    <h3>Novo Cupom</h3>
+    <div class="row">
+      <input id="c_category" placeholder="Categoria (ex: Cupons Exclusivos)" />
+      <input id="c_icon" placeholder="Ícone (emoji) (opcional)" />
+    </div>
+    <div class="row">
+      <input id="c_brand" placeholder="Empresa" />
+      <input id="c_code" placeholder="Cupom" />
+    </div>
+    <textarea id="c_desc" placeholder="Descrição"></textarea>
+    <input id="c_url" placeholder="Link (opcional)" />
+    <label class="muted"><input id="c_pub" type="checkbox" checked /> Publicado</label><br><br>
+    <button id="btnAddCoupon">Salvar Cupom</button>
+    <p id="c_msg" class="muted"></p>
+  </div>
+
+  <div class="card">
+    <h3>Novo Produto</h3>
+    <input id="p_category" placeholder="Categoria (ex: Produtos Favoritos)" />
+    <div class="row">
+      <input id="p_name" placeholder="Nome" />
+      <input id="p_image" placeholder="Imagem (URL) (opcional)" />
+    </div>
+    <textarea id="p_desc" placeholder="Descrição"></textarea>
+    <input id="p_url" placeholder="Link do produto" />
+    <label class="muted"><input id="p_pub" type="checkbox" checked /> Publicado</label><br><br>
+    <button id="btnAddProduct">Salvar Produto</button>
+    <p id="p_msg" class="muted"></p>
+  </div>
+
+  <div class="card">
+    <h3>Itens</h3>
+    <div class="row">
+      <button id="btnLoadCoupons" class="secondary">Recarregar Cupons</button>
+      <button id="btnLoadProducts" class="secondary">Recarregar Produtos</button>
+    </div>
+
+    <h4>Cupons</h4>
+    <div id="couponsList" class="list"></div>
+
+    <h4 style="margin-top:18px;">Produtos</h4>
+    <div id="productsList" class="list"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // COLE AQUI:
+  const SUPABASE_URL = "COLE_AQUI_SUA_PROJECT_URL";
+  const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_ANON_KEY";
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const $ = (id) => document.getElementById(id);
+
+  async function refreshSessionUI() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      $("loginCard").style.display = "block";
+      $("panel").style.display = "none";
+      return;
+    }
+    $("loginCard").style.display = "none";
+    $("panel").style.display = "block";
+    $("userInfo").textContent = "Logado como: " + session.user.email;
+  }
+
+  $("btnLogin").onclick = async () => {
+    $("loginMsg").textContent = "";
+    const email = $("email").value.trim();
+    const password = $("password").value.trim();
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) $("loginMsg").textContent = error.message;
+    else {
+      await refreshSessionUI();
+      await loadCoupons();
+      await loadProducts();
+    }
+  };
+
+  $("btnLogout").onclick = async () => {
+    await supabase.auth.signOut();
+    await refreshSessionUI();
+  };
+
+  async function loadCoupons() {
+    const { data, error } = await supabase
+      .from("coupons")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      $("couponsList").innerHTML = `<div class="muted">${error.message}</div>`;
+      return;
+    }
+
+    $("couponsList").innerHTML = data.map(c => `
+      <div class="item">
+        <div><b>${c.brand}</b> — ${c.description}</div>
+        <div class="muted">Categoria: ${c.category} | Cupom: <b>${c.code}</b> | Publicado: ${c.is_published}</div>
+        <div class="actions">
+          <button class="secondary" onclick="toggleCoupon(${c.id}, ${c.is_published})">Publicar/Despublicar</button>
+          <button class="secondary" onclick="deleteCoupon(${c.id})">Apagar</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  async function loadProducts() {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      $("productsList").innerHTML = `<div class="muted">${error.message}</div>`;
+      return;
+    }
+
+    $("productsList").innerHTML = data.map(p => `
+      <div class="item">
+        <div><b>${p.name}</b> — ${p.description}</div>
+        <div class="muted">Categoria: ${p.category} | Publicado: ${p.is_published}</div>
+        <div class="actions">
+          <button class="secondary" onclick="toggleProduct(${p.id}, ${p.is_published})">Publicar/Despublicar</button>
+          <button class="secondary" onclick="deleteProduct(${p.id})">Apagar</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  $("btnLoadCoupons").onclick = loadCoupons;
+  $("btnLoadProducts").onclick = loadProducts;
+
+  $("btnAddCoupon").onclick = async () => {
+    $("c_msg").textContent = "";
+    const payload = {
+      category: $("c_category").value.trim(),
+      icon: $("c_icon").value.trim() || null,
+      brand: $("c_brand").value.trim(),
+      description: $("c_desc").value.trim(),
+      code: $("c_code").value.trim(),
+      url: $("c_url").value.trim() || null,
+      is_published: $("c_pub").checked
+    };
+
+    const { error } = await supabase.from("coupons").insert(payload);
+    $("c_msg").textContent = error ? error.message : "Cupom salvo!";
+    if (!error) { await loadCoupons(); }
+  };
+
+  $("btnAddProduct").onclick = async () => {
+    $("p_msg").textContent = "";
+    const payload = {
+      category: $("p_category").value.trim(),
+      image_url: $("p_image").value.trim() || null,
+      name: $("p_name").value.trim(),
+      description: $("p_desc").value.trim(),
+      url: $("p_url").value.trim(),
+      is_published: $("p_pub").checked
+    };
+
+    const { error } = await supabase.from("products").insert(payload);
+    $("p_msg").textContent = error ? error.message : "Produto salvo!";
+    if (!error) { await loadProducts(); }
+  };
+
+  // Funções globais p/ botões inline
+  window.deleteCoupon = async (id) => {
+    await supabase.from("coupons").delete().eq("id", id);
+    await loadCoupons();
+  };
+
+  window.deleteProduct = async (id) => {
+    await supabase.from("products").delete().eq("id", id);
+    await loadProducts();
+  };
+
+  window.toggleCoupon = async (id, current) => {
+    await supabase.from("coupons").update({ is_published: !current }).eq("id", id);
+    await loadCoupons();
+  };
+
+  window.toggleProduct = async (id, current) => {
+    await supabase.from("products").update({ is_published: !current }).eq("id", id);
+    await loadProducts();
+  };
+
+  // Inicial
+  refreshSessionUI().then(async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) { await loadCoupons(); await loadProducts(); }
+  });
+</script>
+</body>
 </html>
