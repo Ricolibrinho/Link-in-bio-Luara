@@ -1,9 +1,12 @@
-[
-  {
-    "category": "Produtos Favoritos",
-    "image_url": "",
-    "name": "Sérum Vitamina C",
-    "description": "Essencial na rotina",
-    "url": "https://exemplo.com"
-  }
-]
+{
+  "items": [
+    {
+      "category": "Produtos Favoritos",
+      "image_url": "",
+      "name": "Sérum Vitamina C",
+      "description": "Essencial na rotina",
+      "url": "https://exemplo.com"
+    }
+  ]
+}
+
