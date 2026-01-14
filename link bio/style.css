@@ -1,0 +1,47 @@
+/* Extracted from original index.html */
+body {
+  box-sizing: border-box;
+}
+
+.font-heading {
+  font-family: 'Crimson Pro', serif;
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.link-item {
+  transition: all 0.25s ease;
+}
+
+.link-item:hover {
+  transform: translateX(4px);
+}
+
+.divider {
+  background: linear-gradient(90deg, transparent, #E5E7EB 50%, transparent);
+  height: 1px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.product-card {
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Was in: <style>@view-transition { navigation: auto; }</style> */
+@view-transition { navigation: auto; }
