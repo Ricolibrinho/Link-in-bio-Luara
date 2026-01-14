@@ -84,7 +84,30 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // COLE AQUI:
+  // COLE AQUi 
+  console.log("admin carregou ✅");
+
+document.getElementById("btnLogin").addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  console.log("tentando login com:", email);
+
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+  console.log("data:", data);
+  console.log("error:", error);
+
+  if (error) {
+    document.getElementById("loginMsg").textContent = error.message;
+    return;
+  }
+
+  document.getElementById("loginMsg").textContent = "Logado!";
+});
+  
   const SUPABASE_URL = "https://yxeqmdivbcnsfkboyffk.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_mRpYXGoElj8xB9f600jx2g_EHll3-WZ";
 
@@ -234,4 +257,5 @@
 </script>
 </body>
 </html>
+
 
