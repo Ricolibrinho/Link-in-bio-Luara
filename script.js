@@ -128,16 +128,27 @@ if (window.elementSdk) {
 
 // banco de dados 
 
-const COUPONS_JSON = "/data/coupons.json";
-const PRODUCTS_JSON = "/data/products.json";
+async function initDataTabs() {
+  const COUPONS_JSON = "/data/coupons.json";
+  const PRODUCTS_JSON = "/data/products.json";
 
-const [couponsRes, productsRes] = await Promise.allSettled([
-  fetch(COUPONS_JSON, { cache: "no-store" }).then(r => r.json()),
-  fetch(PRODUCTS_JSON, { cache: "no-store" }).then(r => r.json()),
-]);
+  const tabsEl = document.getElementById("tabs");
+  const contentEl = document.getElementById("tabContent");
 
-const coupons = couponsRes.status === "fulfilled" ? (couponsRes.value.items || []) : [];
-const products = productsRes.status === "fulfilled" ? (productsRes.value.items || []) : [];
+  // Se não existir no HTML, não quebra o site
+  if (!tabsEl || !contentEl) return;
+
+  const [couponsRes, productsRes] = await Promise.allSettled([
+    fetch(COUPONS_JSON, { cache: "no-store" }).then(r => r.json()),
+    fetch(PRODUCTS_JSON, { cache: "no-store" }).then(r => r.json()),
+  ]);
+
+  const coupons = couponsRes.status === "fulfilled" ? (couponsRes.value.items || []) : [];
+  const products = productsRes.status === "fulfilled" ? (productsRes.value.items || []) : [];
+
+  // ---- daqui pra baixo: seu código de abas/render (groupByCategory, renderTabContent etc.)
+  // Se você já tem essas funções no arquivo, só chama a lógica aqui.
+}
 
 function escapeHtml(str) {
   return String(str ?? "")
@@ -291,4 +302,6 @@ async function initTabs() {
   render();
 }
 
-document.addEventListener("DOMContentLoaded", initTabs);
+document.addEventListener("DOMContentLoaded", () => {
+  initDataTabs();
+});
