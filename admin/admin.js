@@ -13,6 +13,7 @@ const supabase = window.__supabaseClient;
 window.__$ = window.__$ || ((id) => document.getElementById(id));
 const $ = window.__$;
 
+console.log("admin.js carregou", new Date().toISOString());
 
 // =======================
 // SESSÃO / UI
