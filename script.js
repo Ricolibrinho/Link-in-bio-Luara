@@ -1,30 +1,24 @@
 // =====================
-// Maria Beauty - Seções separadas (Cupons / Produtos)
-// Lê:
-//  - /data/coupons.json   => { items: [...] }
-//  - /data/products.json  => { items: [...] }
+// Maria Beauty - Site público (Supabase)
 // =====================
 
-const SUPABASE_URL = "https://yxeqmdivbcnsfkboyffk.supabase.co";
+const SUPABASE_URL = "https://yxeqmdivbcnsfkboyffk.supabase.com";
 const SUPABASE_KEY = "sb_publishable_mRpYXGoElj8xB9f600jx2g_EHll3-WZ";
 
+// ---------- fetch ----------
 async function getCoupons() {
-  const r = await fetch(`${SUPABASE_URL}/rest/v1/coupons?select=*&is_published=eq.true&order=created_at.desc`, {
-    headers: {
-      apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${SUPABASE_KEY}`,
-    },
-  });
+  const r = await fetch(
+    `${SUPABASE_URL}/rest/v1/coupons?select=*&is_published=eq.true&order=created_at.desc`,
+    { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
+  );
   return r.ok ? r.json() : [];
 }
 
 async function getProducts() {
-  const r = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&is_published=eq.true&order=created_at.desc`, {
-    headers: {
-      apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${SUPABASE_KEY}`,
-    },
-  });
+  const r = await fetch(
+    `${SUPABASE_URL}/rest/v1/products?select=*&is_published=eq.true&order=created_at.desc`,
+    { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
+  );
   return r.ok ? r.json() : [];
 }
 
@@ -36,13 +30,6 @@ function escapeHtml(str) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-}
-
-async function loadItems(url) {
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return Array.isArray(data?.items) ? data.items : [];
 }
 
 function groupByCategory(items) {
@@ -112,97 +99,55 @@ function productCard(p) {
 }
 
 // ---------- render ----------
-function renderCouponsSection(container, couponsByCat) {
-  const cats = Array.from(couponsByCat.keys());
-  if (!cats.length) return "";
-
-  // opcional: coloca "Cupons Exclusivos" primeiro
-  cats.sort((a, b) => a.localeCompare(b));
-  if (cats.includes("Cupons Exclusivos")) {
-    cats.splice(cats.indexOf("Cupons Exclusivos"), 1);
-    cats.unshift("Cupons Exclusivos");
-  }
-
+function renderSection(title, catsOrdered, rendererByItem) {
   return `
     <section class="mb-14">
       <h2 class="font-heading text-xl font-light mb-6 text-center" style="color:#374151;">
-        Cupons Exclusivos
+        ${escapeHtml(title)}
       </h2>
 
-      ${cats
-        .map((cat) => {
-          const list = couponsByCat.get(cat) || [];
-          if (!list.length) return "";
-          return `
-            <div class="mb-8">
-              ${cat !== "Cupons Exclusivos"
-                ? `<h3 class="text-sm font-medium mb-3 text-center" style="color:#6B7280;">${escapeHtml(cat)}</h3>`
-                : ``
-              }
-              <div class="space-y-3">
-                ${list.map(couponCard).join("")}
-              </div>
-            </div>
-          `;
-        })
-        .join("")}
+      ${catsOrdered.map(({ cat, items }) => `
+        <div class="mb-8">
+          ${cat !== title
+            ? `<h3 class="text-sm font-medium mb-3 text-center" style="color:#6B7280;">${escapeHtml(cat)}</h3>`
+            : ""
+          }
+          ${rendererByItem(items)}
+        </div>
+      `).join("")}
     </section>
   `;
 }
 
-function renderProductsSection(container, productsByCat) {
-  const cats = Array.from(productsByCat.keys());
-  if (!cats.length) return "";
-
-  cats.sort((a, b) => a.localeCompare(b));
-  if (cats.includes("Produtos Favoritos")) {
-    cats.splice(cats.indexOf("Produtos Favoritos"), 1);
-    cats.unshift("Produtos Favoritos");
+function mapToOrderedCats(map, preferredFirstTitle) {
+  let cats = Array.from(map.keys()).sort((a, b) => a.localeCompare(b));
+  if (preferredFirstTitle && cats.includes(preferredFirstTitle)) {
+    cats = [preferredFirstTitle, ...cats.filter((c) => c !== preferredFirstTitle)];
   }
-
-  return `
-    <section class="mb-6">
-      <h2 class="font-heading text-xl font-light mb-6 text-center" style="color:#374151;">
-        Produtos Favoritos
-      </h2>
-
-      ${cats
-        .map((cat) => {
-          const list = productsByCat.get(cat) || [];
-          if (!list.length) return "";
-          return `
-            <div class="mb-8">
-              ${cat !== "Produtos Favoritos"
-                ? `<h3 class="text-sm font-medium mb-3 text-center" style="color:#6B7280;">${escapeHtml(cat)}</h3>`
-                : ``
-              }
-              <div class="grid grid-cols-2 gap-4">
-                ${list.map(productCard).join("")}
-              </div>
-            </div>
-          `;
-        })
-        .join("")}
-    </section>
-  `;
+  return cats
+    .map((cat) => ({ cat, items: map.get(cat) || [] }))
+    .filter((x) => x.items.length);
 }
 
 async function init() {
-  // você escolhe onde quer renderizar (um container único)
-  const [coupons, products] = await Promise.all([getCoupons(), getProducts()]);
   const root = document.getElementById("dynamicContent");
   if (!root) return;
 
-  const [coupons, products] = await Promise.all([
-    loadItems(COUPONS_JSON),
-    loadItems(PRODUCTS_JSON),
-  ]);
+  const [coupons, products] = await Promise.all([getCoupons(), getProducts()]);
 
   const couponsByCat = groupByCategory(coupons);
   const productsByCat = groupByCategory(products);
 
-  const couponsHtml = renderCouponsSection(root, couponsByCat);
-  const productsHtml = renderProductsSection(root, productsByCat);
+  const couponsCats = mapToOrderedCats(couponsByCat, "Cupons Exclusivos");
+  const productsCats = mapToOrderedCats(productsByCat, "Produtos Favoritos");
+
+  const couponsHtml = couponsCats.length
+    ? renderSection("Cupons Exclusivos", couponsCats, (items) => `<div class="space-y-3">${items.map(couponCard).join("")}</div>`)
+    : "";
+
+  const productsHtml = productsCats.length
+    ? renderSection("Produtos Favoritos", productsCats, (items) => `<div class="grid grid-cols-2 gap-4">${items.map(productCard).join("")}</div>`)
+    : "";
 
   if (!couponsHtml && !productsHtml) {
     root.innerHTML = `<p class="text-center text-sm" style="color:#9CA3AF;">Sem itens por enquanto.</p>`;
