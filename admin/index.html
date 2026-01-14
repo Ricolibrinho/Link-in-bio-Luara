@@ -3,94 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
   <title>Admin</title>
-
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 960px;
-      margin: 32px auto;
-      padding: 16px;
-      background: #fafafa;
-    }
-
-    h2, h3 { margin-top: 0; }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-    }
-
-    textarea { resize: vertical; }
-
-    button {
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      background: #111827;
-      color: #fff;
-    }
-
-    button.secondary {
-      background: #fff;
-      color: #111827;
-      border: 1px solid #e5e7eb;
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .muted {
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    .list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .item {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px;
-      background: #fff;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-  </style>
+  
 </head>
 <body>
-
-<h2>Painel Admin</h2>
-<p class="muted">Login e gerenciamento de Cupons e Produtos</p>
-
+<div class="flower-container" id="flower-container"></div> 
 <!-- LOGIN -->
 <div id="loginCard" class="card">
+  <h2 style="color: #32363D; align-self: center;">Painel Administrador</h2>
+  <p class="muted">Login e gerenciamento de Cupons e Produtos</p>
   <h3>Entrar</h3>
   <input id="email" type="email" placeholder="Email" />
   <input id="password" type="password" placeholder="Senha" />
-  <button id="btnLogin" type="button">Login</button>
+  <button style="align-self: center;" id="btnLogin" type="button">Login</button>
   <p id="loginMsg" class="muted"></p>
 </div>
 

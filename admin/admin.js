@@ -11,6 +11,31 @@
 
   const $ = (id) => document.getElementById(id);
 
+  // ====== FLOWERS ANIMATION ======
+
+  const container = document.getElementById('flower-container');
+  const totalFlores = 30; // Altere este número para a quantidade que desejar!
+
+  for (let i = 0; i < totalFlores; i++) {
+      const flower = document.createElement('div');
+      flower.className = 'flower';
+      flower.innerText = '🌸';
+      
+      // Gera valores aleatórios para cada flor
+      const left = Math.random() * 100;           // Posição horizontal (0 a 100%)
+      const delay = Math.random() * 10;          // Atraso para começar (0 a 10s)
+      const duration = 5 + Math.random() * 10;   // Velocidade da queda (5 a 15s)
+      const size = 15 + Math.random() * 20;      // Tamanho da flor (15px a 35px)
+
+      flower.style.left = `${left}%`;
+      flower.style.animationDelay = `${delay}s`;
+      flower.style.animationDuration = `${duration}s`;
+      flower.style.fontSize = `${size}px`;
+
+      container.appendChild(flower);
+  }
+
+
   // ====== UI / SESSION ======
   async function refreshSessionUI() {
     const { data: { session } } = await sb.auth.getSession();
