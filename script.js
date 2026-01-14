@@ -5,8 +5,28 @@
 //  - /data/products.json  => { items: [...] }
 // =====================
 
-const COUPONS_JSON = "/data/coupons.json";
-const PRODUCTS_JSON = "/data/products.json";
+const SUPABASE_URL = "https://yxeqmdivbcnsfkboyffk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_mRpYXGoElj8xB9f600jx2g_EHll3-WZ";
+
+async function getCoupons() {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/coupons?select=*&is_published=eq.true&order=created_at.desc`, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+    },
+  });
+  return r.ok ? r.json() : [];
+}
+
+async function getProducts() {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&is_published=eq.true&order=created_at.desc`, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+    },
+  });
+  return r.ok ? r.json() : [];
+}
 
 // ---------- helpers ----------
 function escapeHtml(str) {
