@@ -1,3 +1,4 @@
+console.log("script.js carregou ✅");
 // Extracted from original index.html
 const defaultConfig = {
   profile_name: 'Maria Beauty',
