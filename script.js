@@ -32,28 +32,19 @@ function escapeHtml(str) {
     .replaceAll("'", "&#039;");
 }
 
-function groupByCategory(items) {
-  const map = new Map();
-  (items || []).forEach((item) => {
-    const cat = String(item?.category ?? "").trim();
-    if (!cat) return;
-    if (!map.has(cat)) map.set(cat, []);
-    map.get(cat).push(item);
-  });
-  return map;
-}
-
 // ---------- cards ----------
 function couponCard(c) {
   const icon = c.icon ? escapeHtml(c.icon) : "🏷️";
   const brand = escapeHtml(c.brand || "");
   const desc = escapeHtml(c.description || "");
   const code = escapeHtml(c.code || "");
+  const category = escapeHtml(c.category || "");
+
   const href = c.url ? c.url : "#";
   const target = c.url ? "_blank" : "_self";
   const rel = c.url ? "noopener noreferrer" : "";
-  const category = escapeHtml(c.category || "");
 
+  // Card inteiro clicável (link do cupom)
   return `
     <a href="${href}" target="${target}" rel="${rel}"
       class="link-item block bg-white rounded-lg p-5 border"
@@ -65,7 +56,7 @@ function couponCard(c) {
             ${icon}
           </div>
           <div class="flex-1">
-            <p class="text-xs mb-1" style='color:#9CA3AF;">${category}</p>
+            ${category ? `<p class="text-xs mb-1" style="color:#9CA3AF;">${category}</p>` : ``}
             <h3 class="font-medium text-sm mb-0.5" style="color:#1F2937;">${brand}</h3>
             <p class="text-xs" style="color:#9CA3AF;">${desc}</p>
           </div>
@@ -80,55 +71,44 @@ function couponCard(c) {
 }
 
 function productCard(p) {
+  const category = escapeHtml(p.category || "");
   const name = escapeHtml(p.name || "");
   const desc = escapeHtml(p.description || "");
   const url = p.url || "#";
+
   const img = p.image_url
     ? `<img src="${p.image_url}" alt="${name}" class="w-14 h-14 mx-auto mb-4 rounded-full object-cover" />`
     : `<div class="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center text-2xl"
            style="background-color:#F9FAFB;">✨</div>`;
 
+  // Card NÃO é link — só o botão "Ver produto →" é clicável
   return `
-    <a href="${url}" target="_blank" rel="noopener noreferrer"
-      class="product-card block bg-white rounded-lg p-5 border text-center"
+    <div class="product-card block bg-white rounded-lg p-5 border text-center"
       style="border-color:#E5E7EB;">
       ${img}
+      ${category ? `<p class="text-xs mb-1" style="color:#9CA3AF;">${category}</p>` : ``}
       <h3 class="font-medium text-sm mb-1" style="color:#1F2937;">${name}</h3>
       <p class="text-xs mb-3" style="color:#9CA3AF;">${desc}</p>
-      <div class="text-xs" style="color:#6B7280;">Ver produto →</div>
-    </a>
+
+      <a href="${url}" target="_blank" rel="noopener noreferrer"
+         class="text-xs inline-block"
+         style="color:#6B7280;">
+        Ver produto →
+      </a>
+    </div>
   `;
 }
 
 // ---------- render ----------
-function renderSection(title, catsOrdered, rendererByItem) {
+function renderListSection(title, items, listHtml) {
   return `
     <section class="mb-14">
       <h2 class="font-heading text-xl font-light mb-6 text-center" style="color:#374151;">
         ${escapeHtml(title)}
       </h2>
-
-      ${catsOrdered.map(({ cat, items }) => `
-        <div class="mb-8">
-          ${cat !== title
-            ? `<h3 class="text-sm font-medium mb-3 text-center" style="color:#6B7280;">${escapeHtml(cat)}</h3>`
-            : ""
-          }
-          ${rendererByItem(items)}
-        </div>
-      `).join("")}
+      ${listHtml(items)}
     </section>
   `;
-}
-
-function mapToOrderedCats(map, preferredFirstTitle) {
-  let cats = Array.from(map.keys()).sort((a, b) => a.localeCompare(b));
-  if (preferredFirstTitle && cats.includes(preferredFirstTitle)) {
-    cats = [preferredFirstTitle, ...cats.filter((c) => c !== preferredFirstTitle)];
-  }
-  return cats
-    .map((cat) => ({ cat, items: map.get(cat) || [] }))
-    .filter((x) => x.items.length);
 }
 
 async function init() {
@@ -137,18 +117,16 @@ async function init() {
 
   const [coupons, products] = await Promise.all([getCoupons(), getProducts()]);
 
-  const couponsByCat = groupByCategory(coupons);
-  const productsByCat = groupByCategory(products);
-
-  const couponsCats = mapToOrderedCats(couponsByCat, "Cupons Exclusivos");
-  const productsCats = mapToOrderedCats(productsByCat, "Produtos Favoritos");
-
-  const couponsHtml = couponsCats.length
-    ? renderSection("Cupons Exclusivos", couponsCats, (items) => `<div class="space-y-4">${items.map(couponCard).join("")}</div>`)
+  const couponsHtml = (coupons && coupons.length)
+    ? renderListSection("Cupons Exclusivos", coupons, (items) =>
+        `<div class="space-y-4">${items.map(couponCard).join("")}</div>`
+      )
     : "";
 
-  const productsHtml = productsCats.length
-    ? renderSection("Produtos Favoritos", productsCats, (items) => `<div class="grid grid-cols-2 gap-4">${items.map(productCard).join("")}</div>`)
+  const productsHtml = (products && products.length)
+    ? renderListSection("Produtos Favoritos", products, (items) =>
+        `<div class="grid grid-cols-2 gap-4">${items.map(productCard).join("")}</div>`
+      )
     : "";
 
   if (!couponsHtml && !productsHtml) {
