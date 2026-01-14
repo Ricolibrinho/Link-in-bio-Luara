@@ -1,8 +1,8 @@
 // =======================
 // CONFIGURAÇÃO SUPABASE
 // =======================
-const SUPABASE_URL = "COLE_AQUI_SUA_PROJECT_URL";
-const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_ANON_KEY";
+const SUPABASE_URL = "https://yxeqmdivbcnsfkboyffk.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_mRpYXGoElj8xB9f600jx2g_EHll3-WZ";
 
 const supabase = window.supabase.createClient(
   SUPABASE_URL,
