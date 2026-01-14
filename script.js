@@ -1,5 +1,5 @@
 // =====================
-// Maria Beauty - Tabs dinâmicas (Decap CMS)
+// Maria Beauty - Seções separadas (Cupons / Produtos)
 // Lê:
 //  - /data/coupons.json   => { items: [...] }
 //  - /data/products.json  => { items: [...] }
@@ -18,6 +18,13 @@ function escapeHtml(str) {
     .replaceAll("'", "&#039;");
 }
 
+async function loadItems(url) {
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) return [];
+  const data = await res.json();
+  return Array.isArray(data?.items) ? data.items : [];
+}
+
 function groupByCategory(items) {
   const map = new Map();
   (items || []).forEach((item) => {
@@ -27,13 +34,6 @@ function groupByCategory(items) {
     map.get(cat).push(item);
   });
   return map;
-}
-
-async function loadItems(url) {
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return Array.isArray(data?.items) ? data.items : [];
 }
 
 // ---------- cards ----------
@@ -91,60 +91,87 @@ function productCard(p) {
   `;
 }
 
-// ---------- tabs ----------
-function tabButton(label, active) {
-  const safe = escapeHtml(label);
+// ---------- render ----------
+function renderCouponsSection(container, couponsByCat) {
+  const cats = Array.from(couponsByCat.keys());
+  if (!cats.length) return "";
+
+  // opcional: coloca "Cupons Exclusivos" primeiro
+  cats.sort((a, b) => a.localeCompare(b));
+  if (cats.includes("Cupons Exclusivos")) {
+    cats.splice(cats.indexOf("Cupons Exclusivos"), 1);
+    cats.unshift("Cupons Exclusivos");
+  }
+
   return `
-    <button
-      data-tab="${safe}"
-      class="px-4 py-2 rounded-full border text-sm transition"
-      style="border-color:#E5E7EB; background:${active ? "#111827" : "#FFFFFF"}; color:${active ? "#FFFFFF" : "#111827"};">
-      ${safe}
-    </button>
+    <section class="mb-14">
+      <h2 class="font-heading text-xl font-light mb-6 text-center" style="color:#374151;">
+        Cupons Exclusivos
+      </h2>
+
+      ${cats
+        .map((cat) => {
+          const list = couponsByCat.get(cat) || [];
+          if (!list.length) return "";
+          return `
+            <div class="mb-8">
+              ${cat !== "Cupons Exclusivos"
+                ? `<h3 class="text-sm font-medium mb-3 text-center" style="color:#6B7280;">${escapeHtml(cat)}</h3>`
+                : ``
+              }
+              <div class="space-y-3">
+                ${list.map(couponCard).join("")}
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </section>
   `;
 }
 
-function renderTabContent(category, couponsByCat, productsByCat) {
-  const coupons = couponsByCat.get(category) || [];
-  const products = productsByCat.get(category) || [];
+function renderProductsSection(container, productsByCat) {
+  const cats = Array.from(productsByCat.keys());
+  if (!cats.length) return "";
 
-  let html = `<div>`;
+  cats.sort((a, b) => a.localeCompare(b));
+  if (cats.includes("Produtos Favoritos")) {
+    cats.splice(cats.indexOf("Produtos Favoritos"), 1);
+    cats.unshift("Produtos Favoritos");
+  }
 
-  if (coupons.length) {
-    html += `
-      <h2 class="font-heading text-xl font-light mb-4 text-center" style="color:#374151;">
-        ${escapeHtml(category)}
+  return `
+    <section class="mb-6">
+      <h2 class="font-heading text-xl font-light mb-6 text-center" style="color:#374151;">
+        Produtos Favoritos
       </h2>
-      <div class="space-y-3 mb-10">
-        ${coupons.map(couponCard).join("")}
-      </div>
-    `;
-  }
 
-  if (products.length) {
-    html += `
-      ${coupons.length ? `<div class="divider mb-10"></div>` : ""}
-      <h3 class="font-heading text-xl font-light mb-4 text-center" style="color:#374151;">
-        ${coupons.length ? "Produtos" : escapeHtml(category)}
-      </h3>
-      <div class="grid grid-cols-2 gap-4">
-        ${products.map(productCard).join("")}
-      </div>
-    `;
-  }
-
-  html += `</div>`;
-  return html;
+      ${cats
+        .map((cat) => {
+          const list = productsByCat.get(cat) || [];
+          if (!list.length) return "";
+          return `
+            <div class="mb-8">
+              ${cat !== "Produtos Favoritos"
+                ? `<h3 class="text-sm font-medium mb-3 text-center" style="color:#6B7280;">${escapeHtml(cat)}</h3>`
+                : ``
+              }
+              <div class="grid grid-cols-2 gap-4">
+                ${list.map(productCard).join("")}
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </section>
+  `;
 }
 
 async function init() {
-  const tabsEl = document.getElementById("tabs");
-  const contentEl = document.getElementById("tabContent");
+  // você escolhe onde quer renderizar (um container único)
+  const root = document.getElementById("dynamicContent");
+  if (!root) return;
 
-  // se não existir container, não faz nada
-  if (!tabsEl || !contentEl) return;
-
-  // carrega dados
   const [coupons, products] = await Promise.all([
     loadItems(COUPONS_JSON),
     loadItems(PRODUCTS_JSON),
@@ -153,44 +180,15 @@ async function init() {
   const couponsByCat = groupByCategory(coupons);
   const productsByCat = groupByCategory(products);
 
-  const categories = Array.from(
-    new Set([...couponsByCat.keys(), ...productsByCat.keys()])
-  );
+  const couponsHtml = renderCouponsSection(root, couponsByCat);
+  const productsHtml = renderProductsSection(root, productsByCat);
 
-  if (!categories.length) {
-    tabsEl.innerHTML = "";
-    contentEl.innerHTML = `<p class="text-center text-sm" style="color:#9CA3AF;">Sem itens por enquanto.</p>`;
+  if (!couponsHtml && !productsHtml) {
+    root.innerHTML = `<p class="text-center text-sm" style="color:#9CA3AF;">Sem itens por enquanto.</p>`;
     return;
   }
 
-  // ordem preferida (se existir)
-  const priority = ["Cupons Exclusivos", "Produtos Favoritos"];
-  categories.sort((a, b) => {
-    const ia = priority.indexOf(a);
-    const ib = priority.indexOf(b);
-    if (ia === -1 && ib === -1) return a.localeCompare(b);
-    if (ia === -1) return 1;
-    if (ib === -1) return -1;
-    return ia - ib;
-  });
-
-  let active = categories[0];
-
-  function render() {
-    tabsEl.innerHTML = categories.map((c) => tabButton(c, c === active)).join("");
-
-    tabsEl.querySelectorAll("button[data-tab]").forEach((btn) => {
-      btn.onclick = () => {
-        active = btn.dataset.tab;
-        render();
-        contentEl.innerHTML = renderTabContent(active, couponsByCat, productsByCat);
-      };
-    });
-
-    contentEl.innerHTML = renderTabContent(active, couponsByCat, productsByCat);
-  }
-
-  render();
+  root.innerHTML = `${couponsHtml}${couponsHtml && productsHtml ? `<div class="divider mb-10"></div>` : ""}${productsHtml}`;
 }
 
 document.addEventListener("DOMContentLoaded", init);
