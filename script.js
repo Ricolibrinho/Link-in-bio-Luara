@@ -52,6 +52,7 @@ function couponCard(c) {
   const href = c.url ? c.url : "#";
   const target = c.url ? "_blank" : "_self";
   const rel = c.url ? "noopener noreferrer" : "";
+  const category = escapeHtml(c.category || ""):
 
   return `
     <a href="${href}" target="${target}" rel="${rel}"
@@ -64,6 +65,7 @@ function couponCard(c) {
             ${icon}
           </div>
           <div class="flex-1">
+            <p class="text-xs mb-1" style='color:#9CA3AF;">${category}</p>
             <h3 class="font-medium text-sm mb-0.5" style="color:#1F2937;">${brand}</h3>
             <p class="text-xs" style="color:#9CA3AF;">${desc}</p>
           </div>
@@ -142,7 +144,7 @@ async function init() {
   const productsCats = mapToOrderedCats(productsByCat, "Produtos Favoritos");
 
   const couponsHtml = couponsCats.length
-    ? renderSection("Cupons Exclusivos", couponsCats, (items) => `<div class="space-y-3">${items.map(couponCard).join("")}</div>`)
+    ? renderSection("Cupons Exclusivos", couponsCats, (items) => `<div class="space-y-4">${items.map(couponCard).join("")}</div>`)
     : "";
 
   const productsHtml = productsCats.length
