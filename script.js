@@ -189,6 +189,7 @@ function renderProductsSection(container, productsByCat) {
 
 async function init() {
   // você escolhe onde quer renderizar (um container único)
+  const [coupons, products] = await Promise.all([getCoupons(), getProducts()]);
   const root = document.getElementById("dynamicContent");
   if (!root) return;
 
