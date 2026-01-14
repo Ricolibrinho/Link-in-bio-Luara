@@ -85,29 +85,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // COLE AQUi 
-  console.log("admin carregou ✅");
-
-document.getElementById("btnLogin").addEventListener("click", async (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  console.log("tentando login com:", email);
-
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
-  console.log("data:", data);
-  console.log("error:", error);
-
-  if (error) {
-    document.getElementById("loginMsg").textContent = error.message;
-    return;
-  }
-
-  document.getElementById("loginMsg").textContent = "Logado!";
-});
-  
   const SUPABASE_URL = "https://yxeqmdivbcnsfkboyffk.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_mRpYXGoElj8xB9f600jx2g_EHll3-WZ";
 
@@ -128,18 +105,26 @@ document.getElementById("btnLogin").addEventListener("click", async (e) => {
   }
 
   $("btnLogin").onclick = async () => {
-    $("loginMsg").textContent = "";
-    const email = $("email").value.trim();
-    const password = $("password").value.trim();
+  $("loginMsg").textContent = "Entrando...";
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) $("loginMsg").textContent = error.message;
-    else {
-      await refreshSessionUI();
-      await loadCoupons();
-      await loadProducts();
-    }
-  };
+  const email = $("email").value.trim();
+  const password = $("password").value.trim();
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) {
+    $("loginMsg").textContent = error.message;
+    return;
+  }
+
+  $("loginMsg").textContent = "Logado!";
+  await refreshSessionUI();
+  await loadCoupons();
+  await loadProducts();
+};
 
   $("btnLogout").onclick = async () => {
     await supabase.auth.signOut();
@@ -257,5 +242,6 @@ document.getElementById("btnLogin").addEventListener("click", async (e) => {
 </script>
 </body>
 </html>
+
 
 
