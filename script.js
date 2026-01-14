@@ -52,7 +52,7 @@ function couponCard(c) {
   const href = c.url ? c.url : "#";
   const target = c.url ? "_blank" : "_self";
   const rel = c.url ? "noopener noreferrer" : "";
-  const category = escapeHtml(c.category || ""):
+  const category = escapeHtml(c.category || "");
 
   return `
     <a href="${href}" target="${target}" rel="${rel}"
