@@ -120,6 +120,7 @@ border: 1px solid #e5e7eb;
 border-radius: 14px;
 padding: 24px;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.185);
+overflow: hidden;
 }
 
 h2, h3 { margin-top: 0; }
@@ -198,10 +199,16 @@ gap: 10px;
 }
 
 .item {
+text-align: left;
+display: flex; 
+flex-direction: column;
 border: 1px solid #e5e7eb;
 border-radius: 12px;
 padding: 12px;
 background: #fff;
+box-sizing: border-box;
+overflow-wrap: anywhere;
+word-break: break-word;
 }
 
 .actions {
@@ -235,4 +242,46 @@ margin-top: 8px;
   10% { opacity: 0.3; }
   90% { opacity: 0.3; }
   100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    /* 1. Empilha os cards um embaixo do outro */
+    .dashboard-grid {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 20px;
+    }
+    .item {
+        justify-items: center;
+        max-width: 50%;
+        }
+      
+    /* 2. Ajusta a largura dos cards para ocupar quase toda a tela */
+    .card_cadastro {
+        
+        width: 50%;
+        max-width: none;
+        padding: 15px; /* Diminui o respiro interno para sobrar espaço pros inputs */
+    }
+
+    /* 3. Ajusta a Foto de Perfil (Mobile) */
+    .profile-container {
+        width: 120px;  /* Tamanho menor que o desktop */
+        height: 120px;
+    }
+
+
+    /* 4. Ajusta a barra de Logado */
+    .card_log {
+        width: 95%;
+        flex-direction: column; /* E-mail em cima, botão embaixo se necessário */
+        gap: 10px;
+    }
+
+    /* 5. Inputs em linha única no mobile */
+    .row {
+        flex-direction: column; /* Aqueles inputs que ficam lado a lado viram coluna */
+        gap: 10px;
+    }
 }

@@ -68,21 +68,22 @@ function couponCard(c) {
   return `
     <a href="${url || "#"}" target="_blank" rel="noopener noreferrer"
       class="block bg-white rounded-lg p-5 border"
-      style="border-color:#E5E7EB;">
+      style="border-color:#E5E7EB; border-radius:28px; background-color:#FAF3EF; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.226);
+      ">
       <div class="flex items-center justify-between gap-4">
         <div class="flex items-center gap-4 flex-1">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg"
+          <div class="w-14 h-14 rounded-full flex items-center justify-center text-lg"
                style="background-color:#F9FAFB; color:#6B7280;">
             ${icon}
           </div>
           <div class="flex-1">
-            ${category ? `<p class="text-xs mb-1" style="color:#9CA3AF;">${category}</p>` : ""}
-            <h3 class="font-medium text-sm mb-0.5" style="color:#1F2937;">${brand}</h3>
+            ${category ? `<p class="text-xs mb-1" style="color:#32363D;">${category}</p>` : ""}
+            <h3 class="font-medium text-sm mb-0.5" style="color:#32363D;">${brand}</h3>
             <p class="text-xs" style="color:#9CA3AF;">${desc}</p>
           </div>
         </div>
         <div class="px-3 py-1.5 rounded-md text-xs font-medium"
-             style="background-color:#F3F4F6; color:#4B5563;">
+             style="border-radius:28px; background-color:#32363D; color:#ffffff;">
           ${code}
         </div>
       </div>
@@ -103,9 +104,9 @@ function productCard(p) {
 
   return `
     <div class="bg-white rounded-lg p-5 border text-center"
-      style="border-color:#E5E7EB;">
+      style="border-color:#E5E7EB; border-radius:28px; background-color:#FAF3EF; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.226);">
       ${img}
-      ${category ? `<p class="text-xs mb-1" style="color:#9CA3AF;">${category}</p>` : ""}
+      ${category ? `<p class="text-xs mb-1" style="color:#32363D;">${category}</p>` : ""}
       <h3 class="font-medium text-sm mb-1" style="color:#1F2937;">${name}</h3>
       <p class="text-xs mb-3" style="color:#9CA3AF;">${desc}</p>
       ${url ? `

@@ -8,7 +8,15 @@ min-height: 100vh;
 /* Criando um gradiente gigante com as suas cores */
 background: linear-gradient(-45deg, #fce4ec, #fdc0a8, #eec7c4, #fdf2f0);
 background-size: 400% 400%; /* Importante: faz o fundo ser 4x o tamanho da tela */
+background-attachment: fixed; /* Mantém o fundo fixo ao rolar */
 animation: gradientBG 15s ease infinite; /* 15 segundos para uma mudança suave */
+}
+
+/* Remova restrições de altura do wrapper no index.html */
+#app-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Evita barra lateral desnecessária */
 }
 
 /* Animação das flores */
@@ -126,5 +134,77 @@ animation: gradientBG 15s ease infinite; /* 15 segundos para uma mudança suave 
     margin-bottom: 30px;
 }
 
+.cupon_tt {
+  background-color: aliceblue;
+
+}
+
 /* Was in: <style>@view-transition { navigation: auto; }</style> */
 @view-transition { navigation: auto; }
+
+/* Versão Mobile */
+
+@media (max-width: 480px) {
+  /* Ajusta o grid de produtos para não ficar apertado */
+  .grid-cols-2 {
+    grid-template-columns: 1fr 1fr; /* Mantém 2 colunas, mas vamos ajustar o card */
+    gap: 10px; /* Reduz o espaço entre eles para ganhar área de imagem */
+  }
+
+  /* Diminui a foto de perfil que está com 200px no CSS */
+  .profile-container {
+    width: 150px; 
+    height: 150px;
+  }
+
+  /* Ajusta os textos para caberem melhor */
+  .product-card h4 {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 480px) {
+  .link-item {
+    padding: 12px !important; /* Diminui o respiro interno dos botões */
+    margin-bottom: 8px;
+  }
+  
+  .link-item span.text-lg {
+    font-size: 1.2rem; /* Emojis um pouco menores */
+  }
+}
+
+/* Estilo para o container de cupons que você gera no script.js */
+.space-y-4 .coupon-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 480px) {
+  .coupon-card {
+    flex-direction: column; /* Em celulares muito pequenos, empilha ícone e texto */
+    text-align: center;
+  }
+}
+
+.tela_princ {
+  background-color: #e5e7eb44;
+  background: blur(100px);
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    background-size: cover;
+  }
+}

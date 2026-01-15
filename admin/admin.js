@@ -91,9 +91,10 @@
     }
 
     $("couponsList").innerHTML = data.map(c => `
-      <div class="item">
+      <div class="item" style="box-sizing: border-box;">
         <div><b>${c.brand}</b> — ${c.description}</div>
-        <div class="muted">Categoria: ${c.category} | Cupom: <b>${c.code}</b> | Publicado: ${c.is_published}</div>
+        <div class="muted">Categoria: ${c.category}</div> 
+        <div class="muted">Cupom: <b>${c.code}</b> | Publicado: ${c.is_published}</div>
         <div class="actions">
           <button class="secondary" data-act="toggleCoupon" data-id="${c.id}" data-cur="${c.is_published}">
             ${c.is_published ? "Despublicar" : "Publicar"}
@@ -148,7 +149,7 @@
     }
 
     $("productsList").innerHTML = data.map(p => `
-      <div class="item">
+      <div class="item" style="box-sizing: border-box;">
         <div><b>${p.name}</b> — ${p.description}</div>
         <div class="muted">Categoria: ${p.category} | Publicado: ${p.is_published}</div>
         <div class="actions">
