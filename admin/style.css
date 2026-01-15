@@ -26,6 +26,46 @@ padding: 24px;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.185);
 }
 
+.dashboard-grid {
+    display: flex;
+    flex-direction: row;      /* Garante que fiquem lado a lado */
+    justify-content: center;  /* Centraliza o grupo na tela */
+    align-items: stretch;  /* Mantém os topos alinhados se um for maior que o outro */
+    gap: 30px;                /* O espaço entre os dois cards */
+    padding: 20px;
+    width: 100%;
+    flex-wrap: wrap;          /* IMPORTANTE: No celular, eles voltam a ficar um embaixo do outro */
+}
+
+.card_cadastro {
+flex: 1;
+margin-top: 0;
+display: flex;
+flex-direction: column;
+justify-items: center;
+align-items: stretch;
+gap: 15px;
+width: 90%;
+max-width: 380px;
+height: auto;           /* Importante: garante que o fundo branco termine após o botão */
+background-image: linear-gradient(45deg,#ea9087,#efaf96);
+border: 1px solid #e5e7eb;
+border-radius: 14px;
+padding: 24px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.185);
+}
+
+.card_cadastro button {
+    margin-top: auto; 
+    align-self: center;
+}
+
+#c_msg, #p_msg {
+    min-height: 20px; 
+    margin-top: 10px;
+    text-align: center;
+}
+
 h2, h3 { margin-top: 0; }
 
 
@@ -80,8 +120,20 @@ gap: 10px;
 }
 
 .muted {
-color: #6b7280;
-font-size: 14px;
+display: flex;            /* Coloca check e texto lado a lado */
+flex-direction: row;      /* Garante que fiquem na mesma linha */
+align-items: center;      /* Alinha os dois verticalmente pelo meio */
+justify-content: center;  /* Centraliza o conjunto no meio do card */
+gap: 8px;                 /* Distância exata entre o texto e o check */
+white-space: nowrap;      /* FORÇA o texto a ficar em uma linha só */
+cursor: pointer;          /* Faz a mãozinha aparecer ao passar o mouse */
+margin: 10px 0;           /* Dá um respiro em cima e embaixo */
+}
+
+.muted input[type="checkbox"] {
+margin: 0;
+width: 16px;
+height: 16px;
 }
 
 .list {

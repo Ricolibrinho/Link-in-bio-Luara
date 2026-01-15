@@ -118,8 +118,21 @@
     };
 
     const { error } = await sb.from("coupons").insert(payload);
-    $("c_msg").textContent = error ? error.message : "Cupom salvo!";
-    if (!error) loadCoupons();
+    const msgElement = $("c_msg");
+    msgElement.textContent = error ? error.message : "Cupom salvo!";
+    if (!error) 
+        loadCoupons();
+
+
+        document.getElementById('c_category').value = '';
+        document.getElementById('c_icon').value = '';
+        document.getElementById('c_brand').value = '';
+        document.getElementById('c_code').value = '';
+        document.getElementById('c_desc').value = '';
+        document.getElementById('c_url').value = '';
+        setTimeout(() => {
+          msgElement.textContent = "";
+        }, 3000);
   });
 
   // ====== PRODUCTS ======
@@ -161,8 +174,19 @@
     };
 
     const { error } = await sb.from("products").insert(payload);
-    $("p_msg").textContent = error ? error.message : "Produto salvo!";
-    if (!error) loadProducts();
+    const msgElement = $("c_msg");
+    msgElement.textContent = error ? error.message : "Produto salvo";
+    if (!error)
+        loadProducts();
+        document.getElementById('p_category').value = '';
+        document.getElementById('p_image').value = '';
+        document.getElementById('p_name').value = '';
+        document.getElementById('p_desc').value = '';
+        document.getElementById('p_url').value = '';
+        setTimeout(() => {
+          msgElement.textContent = "";
+        }, 3000);
+      
   });
 
   // ====== ACTIONS via event delegation (sem window.xxx) ======

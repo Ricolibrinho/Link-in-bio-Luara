@@ -28,55 +28,55 @@
     <button id="btnLogout" class="secondary">Sair</button>
   </div>
 
-  <!-- CUPONS -->
-  <div class="card">
-    <h3>Novo Cupom</h3>
+  <!-- cadastros -->
+  <div class="dashboard-grid">
+    <div class="card_cadastro">
+      <h3>Novo Cupom</h3>
 
-    <div class="row">
-      <input id="c_category" placeholder="Categoria (ex: Cupons Exclusivos)" />
-      <input id="c_icon" placeholder="Ícone (emoji, opcional)" />
+      <div class="row">
+        <input id="c_category" placeholder="Categoria (ex: Cupons Exclusivos)" />
+        <input id="c_icon" placeholder="Ícone (emoji, opcional)" />
+      </div>
+
+      <div class="row">
+        <input id="c_brand" placeholder="Empresa" />
+        <input id="c_code" placeholder="Código do cupom" />
+      </div>
+
+      <input id="c_desc" placeholder="Descrição"></input>
+      <input id="c_url" placeholder="Link (opcional)" />
+      
+      <label class="muted">
+        Publicar agora?
+        <input id="c_pub" type="checkbox" checked /> 
+      </label>
+
+      <button id="btnAddCoupon">Salvar Cupom</button>
+      <p id="c_msg" class="muted"></p>
     </div>
+    <div class="card_cadastro">
+      <h3>Novo Produto</h3>
 
-    <div class="row">
-      <input id="c_brand" placeholder="Empresa" />
-      <input id="c_code" placeholder="Código do cupom" />
+      <input id="p_category" placeholder="Categoria (ex: Produtos Favoritos)" />
+
+      <div class="row">
+        <input id="p_name" placeholder="Nome" />
+        <input id="p_image" placeholder="Imagem (URL opcional)" />
+      </div>
+
+      <input id="p_desc" placeholder="Descrição"></input>
+      <input id="p_url" placeholder="Link do produto" />
+
+      <label class="muted">
+        Publicar agora?
+        <input id="p_pub" type="checkbox" checked />
+      </label>
+      <br><br>
+
+      <button id="btnAddProduct">Salvar Produto</button>
+      <p id="p_msg" class="muted"></p>
     </div>
-
-    <textarea id="c_desc" placeholder="Descrição"></textarea>
-    <input id="c_url" placeholder="Link (opcional)" />
-
-    <label class="muted">
-      <input id="c_pub" type="checkbox" checked /> Publicado
-    </label>
-    <br><br>
-
-    <button id="btnAddCoupon">Salvar Cupom</button>
-    <p id="c_msg" class="muted"></p>
-  </div>
-
-  <!-- PRODUTOS -->
-  <div class="card">
-    <h3>Novo Produto</h3>
-
-    <input id="p_category" placeholder="Categoria (ex: Produtos Favoritos)" />
-
-    <div class="row">
-      <input id="p_name" placeholder="Nome" />
-      <input id="p_image" placeholder="Imagem (URL opcional)" />
-    </div>
-
-    <textarea id="p_desc" placeholder="Descrição"></textarea>
-    <input id="p_url" placeholder="Link do produto" />
-
-    <label class="muted">
-      <input id="p_pub" type="checkbox" checked /> Publicado
-    </label>
-    <br><br>
-
-    <button id="btnAddProduct">Salvar Produto</button>
-    <p id="p_msg" class="muted"></p>
-  </div>
-
+  </div>  
   <!-- LISTAS -->
   <div class="card">
     <h3>Conteúdo</h3>
