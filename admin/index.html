@@ -22,12 +22,12 @@
 
 <!-- PAINEL -->
 <div id="panel" style="display:none;">
-
-  <div class="actions">
-    <span id="userInfo" class="muted"></span>
-    <button id="btnLogout" class="secondary">Sair</button>
+  <div class="card_log">
+    <div class="actions">
+      <span id="userInfo" class="muted"></span>
+      <button id="btnLogout" class="secondary">Sair</button>
+    </div>
   </div>
-
   <!-- cadastros -->
   <div class="dashboard-grid">
     <div class="card_cadastro">
@@ -78,14 +78,15 @@
     </div>
   </div>  
   <!-- LISTAS -->
-  <div class="card">
-    <h3>Conteúdo</h3>
-
-    <h4>Cupons</h4>
-    <div id="couponsList" class="list"></div>
-
-    <h4 style="margin-top:20px;">Produtos</h4>
-    <div id="productsList" class="list"></div>
+  <div class="dashboard-grid_lista">
+    <div class="card_lista">
+      <h4 style="font-size: 20px;">Cupons</h4>
+      <div id="couponsList" class="list"></div>
+    </div>
+    <div class="card_lista">
+      <h4 style="font-size: 20px;">Produtos</h4>
+      <div id="productsList" class="list"></div>
+    </div>
   </div>
 </div>
 

@@ -10,6 +10,31 @@ background-color: #F9F7F2;
 padding-top: 50px;       /* Ajuste esse valor para controlar a distância do topo */
 }
 
+.card_log {
+color: #5e5e5e;
+font-size: 25px;
+display: flex;
+justify-content: center; /* Centraliza o conteúdo horizontalmente */
+align-items: center;     /* Alinha verticalmente */
+gap: 15px;
+background: linear-gradient(45deg, #e5e7eb,#f9d8d4);
+padding: 10px;
+border-radius: 20px;
+margin: 20px auto;       /* Centraliza a barra na tela */
+width: 90%;
+max-width: 800px;        /* Limita a largura para não ficar gigante */
+margin-left: 70px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.185);
+}
+
+.card_log .actions {
+display: flex;           /* Coloca e-mail e botão lado a lado */
+align-items: center;     /* Alinha os dois verticalmente pelo meio */
+justify-content: center; /* Centraliza o par no meio da barra */
+gap: 15px;               /* Espaço entre o e-mail e o botão Sair */
+width: 100%;
+}
+
 .card {
 display: flex;
 flex-direction: column;
@@ -27,14 +52,25 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.185);
 }
 
 .dashboard-grid {
-    display: flex;
-    flex-direction: row;      /* Garante que fiquem lado a lado */
-    justify-content: center;  /* Centraliza o grupo na tela */
-    align-items: stretch;  /* Mantém os topos alinhados se um for maior que o outro */
-    gap: 30px;                /* O espaço entre os dois cards */
-    padding: 20px;
-    width: 100%;
-    flex-wrap: wrap;          /* IMPORTANTE: No celular, eles voltam a ficar um embaixo do outro */
+display: flex;
+flex-direction: row;      /* Garante que fiquem lado a lado */
+justify-content: center;  /* Centraliza o grupo na tela */
+align-items: stretch;  /* Mantém os topos alinhados se um for maior que o outro */
+gap: 15px;                /* O espaço entre os dois cards */
+padding: 20px;
+width: 100%;
+flex-wrap: wrap;          /* IMPORTANTE: No celular, eles voltam a ficar um embaixo do outro */
+}
+
+.dashboard-grid_lista {
+display: flex;
+flex-direction: row;      /* Garante que fiquem lado a lado */
+justify-content: center;  /* Centraliza o grupo na tela */
+align-items: stretch;  /* Mantém os topos alinhados se um for maior que o outro */
+gap: 20px;                /* O espaço entre os dois cards */
+padding: 20px;
+width: 100%;
+flex-wrap: wrap;   
 }
 
 .card_cadastro {
@@ -46,7 +82,8 @@ justify-items: center;
 align-items: stretch;
 gap: 15px;
 width: 90%;
-max-width: 380px;
+min-width: 300px;
+max-width: 400px;
 height: auto;           /* Importante: garante que o fundo branco termine após o botão */
 background-image: linear-gradient(45deg,#ea9087,#efaf96);
 border: 1px solid #e5e7eb;
@@ -56,14 +93,33 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.185);
 }
 
 .card_cadastro button {
-    margin-top: auto; 
-    align-self: center;
+margin-top: auto; 
+align-self: center;
 }
 
 #c_msg, #p_msg {
     min-height: 20px; 
     margin-top: 10px;
     text-align: center;
+}
+
+.card_lista {
+flex: 1;
+margin-top: 0;
+display: flex;
+flex-direction: column;
+justify-items: center;
+align-items: stretch;
+gap: 15px;
+width: 90%;
+min-width: 300px;
+max-width: 400px;
+height: auto;           /* Importante: garante que o fundo branco termine após o botão */
+background-image: linear-gradient(45deg,#ea9087,#efaf96);
+border: 1px solid #e5e7eb;
+border-radius: 14px;
+padding: 24px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.185);
 }
 
 h2, h3 { margin-top: 0; }
