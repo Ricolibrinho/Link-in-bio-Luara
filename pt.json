@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "lang": "pt",
+    "locale": "pt-BR",
+    "currency": "EUR"
+  },
+  "assets": {
+    "images": {
+      "hero": "",
+      "product": "capa-pt.png"
+    }
+  },
+  "pricing": {
+    "now": 20,
+    "was": 98,
+    "ctaCheckoutUrl": "https://pay.hotmart.com/D104052978O?checkoutMode=10",
+    "urgencyText": "Este preço é promocional e pode aumentar a qualquer momento."
+  },
+  "content": {
+    "brandTitle": "A Documentação Mindset",
+    "hero": {
+      "kicker": "Mercado: Alemanha • Garantia: 7 dias • Acesso vitalício",
+      "headline": "O Sistema Completo Para Dominar a Psicologia do Trading — Para Que Você Finalmente Opere Com Disciplina, Não Com Emoção",
+      "subheadline": "Por que 95% dos traders fracassam não tem nada a ver com estratégia. É o que está acontecendo dentro da cabeça deles. Aqui está como consertar isso.",
+      "ctaPrimary": "QUERO ACESSO AGORA — APENAS 20€",
+      "ctaSecondary": "COMEÇAR MINHA TRANSFORMAÇÃO",
+      "badges": ["Acesso imediato", "Garantia de 7 dias", "Compra única"],
+      "miniNote": "Conteúdo direto e claro. Sem promessas irreais. Foco total em disciplina mental.",
+      "imageAlt": "Capa visual do produto",
+      "productAlt": "Mockup do produto"
+    },
+    "pain": {
+      "title": "Se isso já aconteceu com você, não é coincidência",
+      "text": [
+        "Você já teve o setup perfeito.",
+        "Sabia exatamente onde entrar. Sabia exatamente onde sair.",
+        "E então algo aconteceu: medo, ganância, FOMO ou vingança.",
+        "Você saiu cedo demais. Ou ficou tempo demais.",
+        "Você moveu o stop loss porque “acreditava no trade”.",
+        "Você tentou recuperar uma perda e operou fora do plano.",
+        "O resultado foi o mesmo: mais um dia vermelho.",
+        "O problema nunca foi sua estratégia.",
+        "O problema é o que acontece dentro da sua cabeça."
+      ]
+    },
+    "story": {
+      "title": "David e Sarah operavam os mesmos mercados. Tiveram resultados opostos.",
+      "davidLabel": "David: ",
+      "sarahLabel": "Sarah: ",
+      "david": "Engenheiro de software, brilhante. Encheu o gráfico de indicadores e complicou tudo. Em 18 meses, estourou 4 contas e perdeu 65.000 euros.",
+      "sarah": "Ex-crupiê de cassino. Criou um sistema com 3 regras e executou sem emoção. Em 18 meses, estava 42% positiva.",
+      "conclusion": "A diferença não foi inteligência. Foi controle mental."
+    },
+    "truth": {
+      "title": "Seu cérebro está sabotando seu trading",
+      "items": [
+        "Medo faz você sair cedo demais",
+        "Ganância faz você ficar tempo demais",
+        "FOMO faz você perseguir trades fora do plano",
+        "Dor de estar errado faz você mover o stop",
+        "Ansiedade faz você operar demais"
+      ],
+      "closing": "Isso não é fraqueza. É biologia. E dá para treinar."
+    },
+    "product": {
+      "title": "Apresentando: A Documentação Mindset",
+      "description": "Um sistema completo para entender sua mente no trading e treinar disciplina na execução — sem depender de emoção."
+    },
+    "includes": {
+      "title": "O que você recebe",
+      "items": [
+        "A Documentação Mindset (PDF, 45+ páginas)",
+        "Bônus 1: Diário de Psicologia do Trading (PDF, 15 páginas)",
+        "Bônus 2: Protocolo de Emergência (PDF, 8 páginas)",
+        "Bônus 3: Checklist da Rotina Matinal (PDF, 2 páginas)",
+        "Acesso vitalício"
+      ]
+    },
+    "offer": {
+      "title": "Oferta de hoje",
+      "valueBreakdown": [
+        "A Documentação Mindset — 47€",
+        "O Diário de Psicologia do Trading — 27€",
+        "O Protocolo de Emergência — 17€",
+        "O Checklist da Rotina Matinal — 7€"
+      ],
+      "totalLabel": "Valor total",
+      "total": "98€",
+      "priceNowLabel": "Hoje: apenas",
+      "cta": "QUERO ACESSO AGORA — 20€"
+    },
+    "guarantee": {
+      "title": "Garantia de 7 dias — risco zero",
+      "text": "Vá pelo material. Use as técnicas e o diário. Se você não sentir mudança real na sua relação com o trading, peça reembolso e devolvemos cada centavo."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": [
+        {
+          "q": "Isso é um curso de estratégia?",
+          "a": "Não. É sobre a psicologia que faz qualquer estratégia funcionar. Se a mente sabota a execução, a estratégia não se sustenta."
+        },
+        {
+          "q": "Sou iniciante. É para mim?",
+          "a": "Sim. Começar pela mente evita anos de erros repetidos. Primeiro disciplina, depois você aprende estratégia com muito mais clareza."
+        },
+        {
+          "q": "E se não funcionar para mim?",
+          "a": "Você tem garantia de 7 dias. Se não fizer sentido pra você, reembolso simples."
+        },
+        {
+          "q": "Tenho acesso vitalício?",
+          "a": "Sim. Compra única e acesso para sempre."
+        }
+      ]
+    },
+    "ctaFinal": {
+      "title": "Você tem dois caminhos",
+      "text": "Continuar do mesmo jeito… ou começar hoje a transformação de operar com disciplina. A decisão é sua.",
+      "cta": "QUERO ACESSO AGORA — APENAS 20€",
+      "notes": ["Acesso imediato", "Garantia de 7 dias", "Acesso vitalício"]
+    },
+    "sticky": {
+      "top": "Oferta ativa",
+      "cta": "QUERO ACESSO AGORA"
+    },
+    "footer": {
+      "disclaimer": "Aviso legal: este produto é educacional e informativo. Não constitui aconselhamento financeiro. Trading envolve risco significativo de perda. Desempenho passado não garante resultados futuros. Consulte um profissional qualificado.",
+      "copyright": "© 2026"
+    }
+  }
+}

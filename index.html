@@ -1,111 +1,155 @@
 <!doctype html>
-<html lang="pt-BR" class="h-full">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luara Bueno</title>
+<html lang="pt-BR" data-lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="brandTitle"></title>
+  <meta name="description" content="Sistema completo para dominar a psicologia do trading e operar com disciplina." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
 
-    <!-- Tailwind (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<body>
+  <!-- Topbar (opcional: você pode reativar os botões de idioma sem mexer nas chaves/ids) -->
+  <header class="topbar" aria-label="Topo">
+    <div class="topbar__inner">
+      <div class="brand" aria-label="Marca">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name" id="brandTitle"></span>
+      </div>
 
-    <!-- SDKs (mantidos do original) -->
-    <script src="/_sdk/element_sdk.js"></script>
-    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+      <!--
+      <div class="lang" aria-label="Idioma">
+        <button class="lang__btn" type="button" data-lang-btn="pt" aria-pressed="true">Português</button>
+        <button class="lang__btn" type="button" data-lang-btn="de" aria-pressed="false">Deutsch</button>
+      </div>
+      -->
+    </div>
+  </header>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Inter:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="card hero" aria-label="Apresentação">
+      <div class="hero__left">
+        <p class="kicker" id="heroKicker"></p>
+        <h1 class="headline" id="heroHeadline"></h1>
+        <p class="subheadline" id="heroSubheadline"></p>
 
-    <!-- Seu CSS extraído -->
-    <link rel="stylesheet" href="./style.css" />
-  </head>
+        <div class="priceBox" aria-label="Preço e oferta">
+          <div class="priceBox__row">
+            <span class="priceBox__was" id="priceWas"></span>
+            <span class="priceBox__now money" id="priceNow"></span>
+          </div>
+          <p class="priceBox__note" id="urgencyText"></p>
 
-  <body class="h-full font-body">
-    <div class="flower-container" id="flower-container"></div> 
-    <div id="app-wrapper" class="min-h-full w-full overflow-auto">
-      <div class="tela_princ">
-        <!-- Profile Section -->
-        <div class="text-center mb-12 fade-in">
-          <!-- Profile Image -->
-          <div class="relative inline-block mb-6">         
-            <div id="profile-ring">
-              <div class="profile-container">
-                <img src="./image/WhatsApp Image 2026-01-12 at 14.09.03.jpeg" 
-                    alt="Profile Image" 
-                    class="profile-image">
-              </div>
-            </div>          
+          <div class="btnRow">
+            <a class="btn btn--gold" data-cta="checkout" id="ctaHeroPrimary" href="#">Comprar</a>
+            <a class="btn btn--ghost" data-cta="checkout" id="ctaHeroSecondary" href="#">Começar</a>
           </div>
 
-          <!-- Name & Bio -->
-          <h1 id="profile-name" class="font-heading text-3xl font-light mb-3" style="color: #1F2937;">Luara Bueno</h1>
-          <p id="profile-bio" class="text-sm leading-relaxed max-w-sm mx-auto" style="color: #6B7280;">
-            Dicas de beleza e perfumaria<br />
-            Reviews honestos de produtos<br />
-            Cupons exclusivos
-          </p>
-        </div>
-
-        <div class="divider mb-10"></div>
-        
-        <div id="dynamicContent"></div>
-
-        <div id="tabContent"></div>
-
-        <div class="divider mb-10"></div>
-
-        <!-- More Links Section -->
-        <div class="space-y-3 mb-8 fade-in" style="animation-delay: 0.3s;">
-          <a
-            href="https://www.youtube.com/@CachinhosDaLuua/shorts"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-item block bg-white rounded-lg p-5 border text-center"
-            style="border-color:#E5E7EB; border-radius:28px; background-color:#FAF3EF; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.226);"
-          >
-            <div class="flex items-center justify-center gap-3">
-              <span class="text-lg">📺</span>
-              <span class="font-medium text-sm" style="color: #374151;">Canal no YouTube</span>
-            </div>
-          </a>
-
-          <a
-            href="https://www.tiktok.com/@pretinha_luua"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-item block bg-white rounded-lg p-5 border text-center"
-            style="border-color:#E5E7EB; border-radius:28px; background-color:#FAF3EF; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.226);"
-          >
-            <div class="flex items-center justify-center gap-3">
-              <span class="text-lg">🎵</span>
-              <span class="font-medium text-sm" style="color: #374151;">TikTok</span>
-            </div>
-          </a>
-
-          <a
-            href="https://www.instagram.com/luua.bueno_sobrinho/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-item block bg-white rounded-lg p-5 border text-center"
-            style="border-color:#E5E7EB; border-radius:28px; background-color:#FAF3EF; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.226);"
-          >
-            <div class="flex items-center justify-center gap-3">
-              <span class="text-lg">📸</span>
-              <span class="font-medium text-sm" style="color: #374151;">Instagram</span>
-            </div>
-          </a>
-        </div>
-
-        <!-- Footer -->
-        <div class="text-center pt-6">
-          <p class="text-xs" style="color: #9CA3AF;">© 2026 · Feito com carinho!</p>
+          <div class="trustRow" aria-label="Garantias rápidas">
+            <span class="trust" id="badge1"></span>
+            <span class="trust" id="badge2"></span>
+            <span class="trust" id="badge3"></span>
+          </div>
         </div>
       </div>
+
+      <div class="hero__right">
+        <div class="hero__image cardSoft">
+          <img id="productImg" alt="" />
+        </div>
+        <p class="miniNote" id="heroMiniNote"></p>
+      </div>
+    </section>
+
+    <!-- DOR -->
+    <section class="card section section--loss" aria-label="Identificação com a dor">
+      <h2 class="h2" id="painTitle"></h2>
+      <ul class="list list--loss" id="painList"></ul>
+    </section>
+
+    <!-- HISTÓRIA + VERDADE -->
+    <section class="card section" aria-label="História e verdade">
+      <div class="grid2">
+        <div class="cardSoft pad">
+          <h2 class="h2" id="storyTitle"></h2>
+          <p class="p"><strong id="storyDavidLabel"></strong> <span class="muted" id="storyDavid"></span></p>
+          <p class="p"><strong id="storySarahLabel"></strong> <span class="muted" id="storySarah"></span></p>
+          <p class="p good money" id="storyConclusion"></p>
+        </div>
+
+        <div class="cardSoft pad">
+          <h2 class="h2" id="truthTitle"></h2>
+          <ul class="list" id="truthList"></ul>
+          <p class="p muted" id="truthClosing"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUTO -->
+    <section class="card section" aria-label="Produto">
+      <h2 class="h2" id="productTitle"></h2>
+      <p class="p muted" id="productDesc"></p>
+    </section>
+
+    <!-- INCLUSO + OFERTA -->
+    <section class="card section" aria-label="O que está incluso e oferta">
+      <div class="grid2">
+        <div class="cardSoft pad">
+          <h2 class="h2" id="includesTitle"></h2>
+          <ul class="list" id="includesList"></ul>
+        </div>
+
+        <div class="cardSoft pad section--money">
+          <h2 class="h2" id="offerTitle"></h2>
+          <div class="valueBox" id="valueBox"></div>
+
+          <div class="btnRow mt12">
+            <a class="btn btn--gold w100" data-cta="checkout" id="ctaOffer" href="#">Quero acesso agora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARANTIA -->
+    <section class="card section section--money" aria-label="Garantia">
+      <h2 class="h2" id="guaranteeTitle"></h2>
+      <p class="p muted" id="guaranteeText"></p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="card section" aria-label="Perguntas frequentes">
+      <h2 class="h2" id="faqTitle"></h2>
+      <div class="faq" id="faqList"></div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="card section" aria-label="Chamada final">
+      <div class="finalCta">
+        <h2 class="h2" id="ctaFinalTitle"></h2>
+        <p class="p muted" id="ctaFinalText"></p>
+        <a class="btn btn--gold w100" data-cta="checkout" id="ctaFinalBtn" href="#">Quero acesso agora</a>
+        <ul class="chips" id="ctaNotes"></ul>
+      </div>
+    </section>
+
+    <footer class="footer" aria-label="Rodapé">
+      <p class="footer__text" id="footerDisclaimer"></p>
+      <p class="footer__text" id="footerCopyright"></p>
+    </footer>
+  </main>
+
+  <!-- Sticky CTA -->
+  <div class="sticky" aria-label="Comprar agora">
+    <div class="sticky__inner">
+      <div class="sticky__mini">
+        <div class="sticky__top" id="stickyMiniTop"></div>
+        <div class="sticky__price money" id="stickyMiniPrice"></div>
+      </div>
+      <a class="btn btn--gold sticky__btn" data-cta="checkout" id="stickyBtn" href="#">Quero acesso agora</a>
     </div>
-    <script src="./script.js"></script>
-  </body>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
 </html>

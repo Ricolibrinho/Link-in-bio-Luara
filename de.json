@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "lang": "de",
+    "locale": "de-DE",
+    "currency": "EUR"
+  },
+  "assets": {
+    "images": {
+      "hero": "",
+      "product": "capa-de.png"
+    }
+  },
+  "pricing": {
+    "now": 20,
+    "was": 98,
+    "ctaCheckoutUrl": "https://pay.hotmart.com/D104052978O?checkoutMode=10",
+    "urgencyText": "Dieser Preis ist ein Aktionspreis und kann jederzeit steigen."
+  },
+  "content": {
+    "brandTitle": "Das Mindset-Dossier",
+    "hero": {
+      "kicker": "Markt: Deutschland • 7 Tage Garantie • Lebenslanger Zugriff",
+      "headline": "Das komplette System, um die Trading-Psychologie zu meistern – damit Sie endlich mit Disziplin handeln, nicht mit Emotionen",
+      "subheadline": "Warum 95% der Trader scheitern, hat kaum mit Strategie zu tun. Es geht darum, was in ihrem Kopf passiert. Hier ist, wie Sie das ändern.",
+      "ctaPrimary": "JETZT ZUGANG – NUR 20€",
+      "ctaSecondary": "MEINE VERÄNDERUNG STARTEN",
+      "badges": ["Sofortiger Zugriff", "7 Tage Garantie", "Einmal zahlen"],
+      "miniNote": "Klar, ruhig und ohne Hype. Fokus: mentale Disziplin und saubere Ausführung.",
+      "imageAlt": "Produktvisualisierung",
+      "productAlt": "Produkt-Mockup"
+    },
+    "pain": {
+      "title": "Wenn Ihnen das bekannt vorkommt, ist das kein Zufall",
+      "text": [
+        "Sie hatten ein perfektes Setup.",
+        "Sie wussten genau, wann rein – und wann raus.",
+        "Und dann passierte etwas: Angst, Gier, FOMO oder „Rache-Trading“.",
+        "Sie steigen zu früh aus – oder bleiben zu lange drin.",
+        "Sie verschieben den Stop, weil Sie „an den Trade glauben“.",
+        "Sie handeln nach einem Verlust außerhalb Ihres Plans.",
+        "Das Ergebnis ist dasselbe: ein weiterer roter Tag.",
+        "Das Problem war nie Ihre Strategie.",
+        "Das Problem ist, was in Ihrem Kopf passiert."
+      ]
+    },
+    "story": {
+      "title": "David und Sarah handelten dieselben Märkte – mit komplett unterschiedlichen Ergebnissen.",
+      "davidLabel": "David: ",
+      "sarahLabel": "Sarah: ",
+      "david": "Software-Ingenieur, sehr klug. Er überlud seine Charts und machte alles unnötig komplex. Nach 18 Monaten hatte er 4 Konten gesprengt und 65.000 Euro verloren.",
+      "sarah": "Ehemalige Casino-Croupière. Sie hatte ein System mit 3 Regeln und führte es emotionslos aus. Nach 18 Monaten war sie 42% im Plus.",
+      "conclusion": "Der Unterschied war nicht Intelligenz. Es war mentale Kontrolle."
+    },
+    "truth": {
+      "title": "Ihr Gehirn sabotiert Ihr Trading",
+      "items": [
+        "Angst lässt Sie Gewinner zu früh schließen",
+        "Gier lässt Sie zu lange im Trade bleiben",
+        "FOMO bringt Sie zu Trades außerhalb Ihres Plans",
+        "Der Schmerz, falsch zu liegen, lässt Sie Stops verschieben",
+        "Stress führt zu Overtrading"
+      ],
+      "closing": "Das ist keine Schwäche. Das ist Biologie – und Sie können sie trainieren."
+    },
+    "product": {
+      "title": "Vorstellung: Das Mindset-Dossier",
+      "description": "Ein vollständiges System, um zu verstehen, wie Sie im Trading denken – und Disziplin in der Ausführung aufzubauen, statt von Emotionen gesteuert zu werden."
+    },
+    "includes": {
+      "title": "Was Sie erhalten",
+      "items": [
+        "Das Mindset-Dossier (PDF, 45+ Seiten)",
+        "Bonus 1: Trading-Psychologie-Tagebuch (PDF, 15 Seiten)",
+        "Bonus 2: Notfall-Protokoll (PDF, 8 Seiten)",
+        "Bonus 3: Morgen-Checkliste (PDF, 2 Seiten)",
+        "Lebenslanger Zugriff"
+      ]
+    },
+    "offer": {
+      "title": "Heutiges Angebot",
+      "valueBreakdown": [
+        "Das Mindset-Dossier — 47€",
+        "Trading-Psychologie-Tagebuch — 27€",
+        "Notfall-Protokoll — 17€",
+        "Morgen-Checkliste — 7€"
+      ],
+      "totalLabel": "Gesamtwert",
+      "total": "98€",
+      "priceNowLabel": "Heute: nur",
+      "cta": "JETZT ZUGANG – 20€"
+    },
+    "guarantee": {
+      "title": "7 Tage Garantie – ohne Risiko",
+      "text": "Gehen Sie das Material durch. Nutzen Sie die Techniken und das Tagebuch. Wenn Sie keine echte Veränderung in Ihrer Trading-Beziehung spüren, beantragen Sie die Rückerstattung – unkompliziert."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "items": [
+        {
+          "q": "Ist das ein Strategie-Kurs?",
+          "a": "Nein. Es geht um die Psychologie, die jede Strategie erst funktionieren lässt. Wenn die Ausführung sabotiert wird, bringt die beste Strategie nichts."
+        },
+        {
+          "q": "Ich bin Anfänger. Ist das für mich?",
+          "a": "Ja. Mit dem Mindset zu starten spart Jahre an wiederholten Fehlern. Erst Disziplin, dann Strategie mit viel mehr Klarheit."
+        },
+        {
+          "q": "Was, wenn es bei mir nicht funktioniert?",
+          "a": "Deshalb gibt es 7 Tage Garantie. Wenn es nicht passt, bekommen Sie Ihr Geld zurück."
+        },
+        {
+          "q": "Habe ich lebenslangen Zugriff?",
+          "a": "Ja. Einmal kaufen, dauerhaft Zugriff."
+        }
+      ]
+    },
+    "ctaFinal": {
+      "title": "Sie haben zwei Wege",
+      "text": "Weitermachen wie bisher… oder heute beginnen, mit Disziplin statt Emotionen zu handeln. Die Entscheidung liegt bei Ihnen.",
+      "cta": "JETZT ZUGANG – NUR 20€",
+      "notes": ["Sofortiger Zugriff", "7 Tage Garantie", "Lebenslanger Zugriff"]
+    },
+    "sticky": {
+      "top": "Angebot aktiv",
+      "cta": "JETZT ZUGANG"
+    },
+    "footer": {
+      "disclaimer": "Rechtlicher Hinweis: Dieses Produkt dient ausschließlich Bildungs- und Informationszwecken und stellt keine Finanzberatung dar. Trading ist mit erheblichen Verlustrisiken verbunden. Vergangene Ergebnisse sind keine Garantie für zukünftige Resultate. Bitte ziehen Sie ggf. qualifizierte Fachleute hinzu.",
+      "copyright": "© 2026"
+    }
+  }
+}
