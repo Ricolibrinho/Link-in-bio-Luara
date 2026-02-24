@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 430">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ffd8d8"/><stop offset="1" stop-color="#fff"/></linearGradient></defs>
+  <rect width="700" height="430" fill="url(#g)"/>
+  <rect x="80" y="92" width="540" height="280" rx="20" fill="#f5f5f5" stroke="#be0f17" stroke-width="10"/>
+  <rect x="95" y="106" width="510" height="36" rx="14" fill="#be0f17"/>
+  <text x="350" y="132" text-anchor="middle" font-size="26" font-family="Arial" fill="#fff" font-weight="700">ESTANDE DISPROL — VISTA FRONTAL</text>
+</svg>

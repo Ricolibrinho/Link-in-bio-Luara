@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 430">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ffe6d2"/><stop offset="1" stop-color="#fff"/></linearGradient></defs>
+  <rect width="700" height="430" fill="url(#g)"/>
+  <polygon points="100,360 330,110 620,110 390,360" fill="#f8f8f8" stroke="#be0f17" stroke-width="9"/>
+  <rect x="280" y="118" width="270" height="30" rx="12" fill="#be0f17"/>
+  <text x="420" y="141" text-anchor="middle" font-size="18" font-family="Arial" fill="#fff" font-weight="700">VISTA ESQUERDA</text>
+</svg>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disprol | Link Tree Super Rio ExpoFood 2026</title>
+    <meta name="description" content="Central de links da Disprol para a Super Rio ExpoFood 2026." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="linktree.css" />
+  </head>
+  <body data-stand="front">
+    <div class="bg-layer bg-front"></div>
+    <div class="bg-layer bg-left"></div>
+    <div class="bg-layer bg-right"></div>
+
+    <main class="app">
+      <header class="hero">
+        <!-- Troque o arquivo abaixo pela sua logo oficial -->
+        <picture>
+          <source srcset="assets/brand/disprol-logo.png" type="image/png" />
+          <img class="logo-disprol" src="assets/disprol-logo.svg" alt="Logo Disprol Atacadista" />
+        </picture>
+        <p class="hero-subtitle">Conecte-se à Disprol na <strong>Super Rio ExpoFood 2026</strong></p>
+      </header>
+
+      <nav class="links-grid" aria-label="Navegação principal">
+        <button class="link-btn" data-target="historia" data-rotation="left">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"/><path d="M10 9.2v5.6L15 12z" fill="#fff"/></svg>
+          Nossa História
+        </button>
+
+        <a class="link-btn" href="https://www.instagram.com/disprolatacadista" target="_blank" rel="noopener noreferrer">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.7" fill="#fff"/><circle cx="17.3" cy="6.8" r="1.1" fill="#fff"/></svg>
+          Siga-nos no Instagram
+        </a>
+
+        <button class="link-btn" data-target="promocoes" data-rotation="right">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h2l1.5 8.2a1 1 0 0 0 1 .8h6.9a1 1 0 0 0 1-.7L19 8H8"/><circle cx="10" cy="18" r="1.6"/><circle cx="16" cy="18" r="1.6"/></svg>
+          Promoções Exclusivas
+        </button>
+
+        <button class="link-btn" data-target="reforma" data-rotation="right">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h8l4 4v12H7z"/><path d="M15 4v4h4" fill="#fff"/><path d="M10 13h6M10 16h6M10 10h3" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>
+          Reforma Tributária Descomplicada
+        </button>
+
+        <a class="link-btn" href="https://forms.gle/" target="_blank" rel="noopener noreferrer">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4m-7 8a7 7 0 0 1 14 0"/></svg>
+          Seja Nosso Cliente
+        </a>
+      </nav>
+
+      <section class="content-card is-active" id="home">
+        <h1>Bem-vindo(a) ao nosso estande digital</h1>
+        <p>Uma navegação rápida, suave e minimalista para você acessar tudo da Disprol durante a feira.</p>
+      </section>
+
+      <section class="content-card" id="historia">
+        <div class="card-head">
+          <h2>Nossa História</h2>
+          <button class="btn-back" data-target="home" data-rotation="front">Voltar</button>
+        </div>
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/aqz-KE-bpKQ"
+            title="Vídeo institucional Disprol"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <section class="content-card" id="promocoes">
+        <div class="card-head">
+          <h2>Promoções Exclusivas</h2>
+          <button class="btn-back" data-target="home" data-rotation="front">Voltar</button>
+        </div>
+        <p class="card-intro">Vitrine Digital da Disprol para a Super Rio ExpoFood 2026.</p>
+        <div class="products-grid">
+          <article class="product"><h3>Arroz Premium 5kg</h3><p>De R$ 32,90 por <strong>R$ 26,90</strong></p></article>
+          <article class="product"><h3>Azeite Extra Virgem 500ml</h3><p>De R$ 29,90 por <strong>R$ 23,90</strong></p></article>
+          <article class="product"><h3>Café Torrado 500g</h3><p>De R$ 18,50 por <strong>R$ 14,99</strong></p></article>
+          <article class="product"><h3>Leite Integral 1L (12 un.)</h3><p>De R$ 58,80 por <strong>R$ 49,90</strong></p></article>
+        </div>
+      </section>
+
+      <section class="content-card" id="reforma">
+        <div class="card-head">
+          <h2>Reforma Tributária Descomplicada</h2>
+          <button class="btn-back" data-target="home" data-rotation="front">Voltar</button>
+        </div>
+        <p>A Reforma Tributária simplifica o sistema ao substituir diversos tributos por um modelo mais claro e moderno.</p>
+        <p>Com maior previsibilidade, empresas conseguem planejar melhor custos, formação de preço e gestão fiscal.</p>
+        <p>Na Disprol, acompanhamos esse cenário para apoiar nossos clientes com informação prática e objetiva.</p>
+      </section>
+
+      <footer class="footer">
+        <a href="https://www.superrio.com.br/sre" target="_blank" rel="noopener noreferrer" class="event-link">
+          <!-- Troque o arquivo abaixo pela logo oficial do evento -->
+          <picture>
+            <source srcset="assets/brand/super-rio-logo.png" type="image/png" />
+            <img src="assets/sre-logo.svg" alt="Logo Super Rio ExpoFood" />
+          </picture>
+          <span>Saiba mais sobre o evento</span>
+        </a>
+      </footer>
+    </main>
+
+    <script src="linktree.js"></script>
+  </body>
+</html>
